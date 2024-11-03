@@ -10,7 +10,8 @@ import dayjs from 'dayjs';
 import * as fs from 'fs';
 import { type ICosConfig } from './index';
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const COS = require('cos-nodejs-sdk-v5');
+// const COS = require('cos-nodejs-sdk-v5');
+import COS from 'cos-nodejs-sdk-v5';
 
 const cos = new COS({
   SecretId: COS_SECRET_ID,
@@ -47,7 +48,7 @@ const uploadFile = async (config: ICosConfig) => {
 const mkdirUpload = async () => {
   try {
     await fs.promises.stat('src/../.uploads');
-  } catch (e) {
+  } catch {
     // 不存在文件夹，直接创建 {recursive: true} 这个配置项是配置自动创建多个文件夹
     console.log('创建uploads文件夹');
     await fs.promises.mkdir('src/../.uploads', { recursive: true });
