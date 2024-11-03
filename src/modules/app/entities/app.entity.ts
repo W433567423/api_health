@@ -6,7 +6,7 @@ import {
 } from 'typeorm';
 
 @Entity()
-export class AppEntity extends BaseEntity {
+export class TimeEntity extends BaseEntity {
   @CreateDateColumn({
     type: 'timestamp',
   })

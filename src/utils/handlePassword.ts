@@ -43,7 +43,7 @@ const eqPassword = (originPassword: string, password: string) => {
 // const makeToken = (dbUser: UserEntity) => {
 //   const user = {
 //     id: dbUser.id,
-//     username: dbUser.username,
+//     user_name: dbUser.user_name,
 //   };
 //   // RS256非对称加密(min:2048)、HS256对拆加密(固定密钥)加密
 //   const token = sign(user, privateSecret, {

@@ -29,10 +29,9 @@ export class UserService {
 
     private jwtService: JwtService,
   ) {}
-
   // 用户名查询用户
-  async isExistByName(username: string, status: 'login' | 'registry') {
-    const user = await this.userRepository.findOne({ where: { username } });
+  async isExistByName(user_name: string, status: 'login' | 'registry') {
+    const user = await this.userRepository.findOne({ where: { user_name } });
     if (status === 'login' && !user) {
       throw new HttpException('该用户名尚未注册', HttpStatus.FORBIDDEN);
     }
@@ -44,7 +43,7 @@ export class UserService {
 
   // 注册服务
   async registry(
-    username: string,
+    user_name: string,
     originPassword: string,
     emailValid: string,
     validServer: number,
@@ -53,12 +52,12 @@ export class UserService {
     eqValidNumber(Number(emailValid), validServer);
 
     // 查询该用户名是否注册
-    await this.isExistByName(username, 'registry');
+    await this.isExistByName(user_name, 'registry');
 
     const password = md5Password(originPassword);
     // 新建用户
     const dbUser = await this.userRepository.save({
-      username,
+      user_name,
       password,
       email,
     });
@@ -68,14 +67,14 @@ export class UserService {
       user: dbUser,
       token: await this.jwtService.signAsync({
         id: dbUser.id,
-        username: dbUser.username,
+        user_name: dbUser.user_name,
       }),
     };
   }
 
   // 登录服务
   async login(
-    username: string,
+    user_name: string,
     password: string,
     codeValid: string,
     validServer: string,
@@ -83,7 +82,7 @@ export class UserService {
     eqValidString(codeValid, validServer);
 
     // 查询该用户名是否注册
-    const dbUser = (await this.isExistByName(username, 'login')) as UserEntity;
+    const dbUser = (await this.isExistByName(user_name, 'login')) as UserEntity;
 
     // 比较密码
     eqPassword(dbUser.password, md5Password(password));
@@ -93,7 +92,7 @@ export class UserService {
       user: dbUser,
       token: await this.jwtService.signAsync({
         id: dbUser.id,
-        username: dbUser.username,
+        user_name: dbUser.user_name,
       }),
     };
     // return makeToken(dbUser);

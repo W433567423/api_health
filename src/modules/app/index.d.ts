@@ -6,7 +6,7 @@ interface IResData<T> {
 
 interface IUser {
   id: number;
-  username: string;
+  user_name: string;
   iat: number;
   exp: number;
 }
@@ -14,4 +14,4 @@ interface IUser {
 interface IReqUser extends Request {
   user?: IUser;
 }
-export type { IUser, IReqUser, IResData };
+export type { IReqUser, IResData, IUser };

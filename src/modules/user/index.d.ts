@@ -1,6 +1,6 @@
 interface registryData {
   id: number;
-  username: string;
+  user_name: string;
   token: string;
 }
 export type { registryData };

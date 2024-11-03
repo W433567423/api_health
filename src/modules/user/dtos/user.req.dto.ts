@@ -3,7 +3,7 @@ import { IsEmail, IsNotEmpty } from 'class-validator';
 export class userDefaultReqDto {
   @ApiProperty({ description: '用户名', example: 'test' })
   @IsNotEmpty({ message: '用户名不能为空' })
-  readonly username: string;
+  readonly user_name: string;
 }
 
 export class userRegistryReqDto extends userDefaultReqDto {

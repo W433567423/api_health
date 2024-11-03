@@ -1,9 +1,9 @@
-import { AppEntity } from '@/modules/app/entities/app.entity';
+import { TimeEntity } from '@/modules/app/entities/app.entity';
 import { UserEntity } from '@/modules/user/entities/user.entity';
 import { Column, Entity, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity('avatar')
-export class AvatarsEntity extends AppEntity {
+export class AvatarsEntity extends TimeEntity {
   @PrimaryGeneratedColumn({ type: 'int' })
   id: number;
 
