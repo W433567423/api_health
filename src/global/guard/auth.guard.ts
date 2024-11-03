@@ -1,5 +1,5 @@
 import { jwtSecret } from '@/config/jwt.config';
-import type { IReqUser, IUser } from '@/modules';
+import type { IReqUser, IUser } from '@/modules/app';
 import {
   HttpException,
   HttpStatus,

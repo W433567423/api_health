@@ -1,4 +1,4 @@
-import type { IResData } from '@/modules';
+import type { IResData } from '@/modules/app';
 import {
   CallHandler,
   ExecutionContext,
