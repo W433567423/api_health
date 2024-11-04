@@ -11,7 +11,7 @@ import {
 
 @Entity('user')
 export class UserEntity extends TimeEntity {
-  @PrimaryGeneratedColumn({ type: 'int' })
+  @PrimaryGeneratedColumn({ type: 'int', comment: '用户id' })
   id: number;
 
   @Column({ type: 'varchar', comment: '用户名', length: 20 })
@@ -32,12 +32,7 @@ export class UserEntity extends TimeEntity {
   @Column({ type: 'int', comment: '体重' })
   weight: number;
 
-  @CreateDateColumn({
-    type: 'timestamp',
-  })
-  createTime: Date;
-
-  @Column({ type: 'varchar', comment: '真实姓名', nullable: true })
+  @Column({ type: 'varchar', comment: '真实姓名' })
   real_name: string;
 
   @Column({ type: 'varchar', nullable: true, comment: '联系电话', length: 11 })

@@ -9,11 +9,13 @@ import {
 export class TimeEntity extends BaseEntity {
   @CreateDateColumn({
     type: 'timestamp',
+    comment: '创建时间',
   })
-  createTime: Date;
+  create_time: Date;
 
   @UpdateDateColumn({
     type: 'timestamp',
+    comment: '更新时间',
   })
-  updateTime: Date;
+  update_time: Date;
 }
