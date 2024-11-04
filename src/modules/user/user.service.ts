@@ -148,11 +148,4 @@ export class UserService {
     user!.avatar = avatar;
     return this.userRepository.update(userId, user!);
   }
-
-  // 更新用户平安Cookie
-  async updatePeaceCookie(cookie: string) {
-    const user = await this.getUser();
-    user.peace = cookie;
-    return this.userRepository.update(user.id, user);
-  }
 }

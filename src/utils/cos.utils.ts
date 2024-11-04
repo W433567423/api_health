@@ -11,7 +11,7 @@ import * as fs from 'fs';
 import { type ICosConfig } from './index';
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 // const COS = require('cos-nodejs-sdk-v5');
-import COS from 'cos-nodejs-sdk-v5';
+import * as COS from 'cos-nodejs-sdk-v5';
 
 const cos = new COS({
   SecretId: COS_SECRET_ID,
