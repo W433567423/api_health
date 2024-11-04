@@ -2,7 +2,6 @@ import { TimeEntity } from '@/modules/app/entities/app.entity';
 import { AvatarsEntity } from '@/modules/file/entities/avatar.entity';
 import {
   Column,
-  CreateDateColumn,
   Entity,
   JoinColumn,
   OneToOne,
