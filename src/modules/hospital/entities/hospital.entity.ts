@@ -1,10 +1,12 @@
 import { TimeEntity } from '@/modules/app/entities/app.entity';
+import { DoctorEntity } from '@/modules/doctor/entities/doctor.entity';
 import { UserEntity } from '@/modules/user/entities/user.entity';
 import {
   Column,
   Entity,
   JoinColumn,
-  OneToOne,
+  ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 
@@ -28,7 +30,10 @@ export class HospitalEntity extends TimeEntity {
   @Column({ type: 'varchar', comment: '级别', length: 6 })
   level: string;
 
-  @OneToOne(() => UserEntity, (user) => user.avatar)
-  @JoinColumn()
+  @OneToMany(() => DoctorEntity, (doctor) => doctor.hospital)
+  doctors: DoctorEntity[];
+
+  @ManyToOne(() => UserEntity, (user) => user.hospitals)
+  @JoinColumn({ name: 'user_id' })
   user: UserEntity;
 }

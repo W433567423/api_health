@@ -31,6 +31,6 @@ export class AvatarsEntity extends TimeEntity {
   size: string;
 
   @OneToOne(() => UserEntity, (user) => user.avatar)
-  @JoinColumn()
+  @JoinColumn({ name: 'user_id' })
   user: UserEntity;
 }

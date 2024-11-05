@@ -6,11 +6,12 @@ import UnifyResponseInterceptor from '@/global/interceptor/unify-response.interc
 import LoggerMiddleware from '@/global/middleware/logger.middleware';
 import { AppController } from '@/modules/app/app.controller';
 import { FileModule } from '@/modules/file/file.module';
-import { UserModule } from '@/modules/user/user.module';
 import { HospitalModule } from '@/modules/hospital/hospital.module';
+import { UserModule } from '@/modules/user/user.module';
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { APP_FILTER, APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { DoctorModule } from '../doctor/doctor.module';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
     UserModule,
     FileModule,
     HospitalModule,
+    DoctorModule,
   ],
   controllers: [AppController],
   providers: [
