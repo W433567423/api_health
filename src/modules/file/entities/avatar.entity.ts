@@ -1,6 +1,12 @@
 import { TimeEntity } from '@/modules/app/entities/app.entity';
 import { UserEntity } from '@/modules/user/entities/user.entity';
-import { Column, Entity, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  OneToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 
 @Entity('avatar')
 export class AvatarsEntity extends TimeEntity {
@@ -25,5 +31,6 @@ export class AvatarsEntity extends TimeEntity {
   size: string;
 
   @OneToOne(() => UserEntity, (user) => user.avatar)
+  @JoinColumn()
   user: UserEntity;
 }

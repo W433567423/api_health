@@ -45,4 +45,4 @@ Rust 的轻量级 HTTP 框架，具有类似 REST 的功能。Rustful 的主要�
 
 - npx husky-init
 - cpm i -g @nestjs/cli
-- 新建控制器`nest g resource modules/<name> --no-spec`
+- 新建控制器`nest g resource modules/<name> --no-spec `

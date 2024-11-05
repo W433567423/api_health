@@ -1,5 +1,6 @@
 import { TimeEntity } from '@/modules/app/entities/app.entity';
 import { AvatarsEntity } from '@/modules/file/entities/avatar.entity';
+import { HospitalEntity } from '@/modules/hospital/entities/hospital.entity';
 import {
   Column,
   Entity,
@@ -56,6 +57,9 @@ export class UserEntity extends TimeEntity {
   nation: string;
 
   @OneToOne(() => AvatarsEntity, (avatar) => avatar.user)
-  @JoinColumn()
   avatar: AvatarsEntity;
+
+  @OneToOne(() => HospitalEntity, (hospital) => hospital.user)
+  @JoinColumn()
+  hospital: HospitalEntity;
 }

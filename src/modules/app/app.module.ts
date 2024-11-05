@@ -7,6 +7,7 @@ import LoggerMiddleware from '@/global/middleware/logger.middleware';
 import { AppController } from '@/modules/app/app.controller';
 import { FileModule } from '@/modules/file/file.module';
 import { UserModule } from '@/modules/user/user.module';
+import { HospitalModule } from '@/modules/hospital/hospital.module';
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { APP_FILTER, APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core';
 import { TypeOrmModule } from '@nestjs/typeorm';
@@ -17,6 +18,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
     TypeOrmModule.forRoot(MySQLConfig),
     UserModule,
     FileModule,
+    HospitalModule,
   ],
   controllers: [AppController],
   providers: [
