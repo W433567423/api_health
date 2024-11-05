@@ -19,8 +19,8 @@ export class ReviewerEntity extends TimeEntity {
   @Column({ type: 'varchar', comment: '审核者名字', length: 20 })
   reviewer_name: string;
 
-  @Column({ type: 'varchar', comment: '性别', length: 1 })
-  six: string;
+  @Column({ type: 'varchar', comment: '性别', length: 1, nullable: true })
+  six?: string;
 
   @ManyToOne(() => HospitalEntity, (hospital) => hospital.reviewers)
   @JoinColumn({ name: 'hospital_id' })
