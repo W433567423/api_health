@@ -60,6 +60,5 @@ export class UserEntity extends TimeEntity {
   avatar: AvatarsEntity;
 
   @OneToOne(() => HospitalEntity, (hospital) => hospital.user)
-  @JoinColumn()
   hospital: HospitalEntity;
 }
