@@ -1,5 +1,6 @@
 import { TimeEntity } from '@/modules/app/entities/app.entity';
 import { DoctorEntity } from '@/modules/doctor/entities/doctor.entity';
+import { InspectorEntity } from '@/modules/inspector/entities/inspector.entity';
 import { UserEntity } from '@/modules/user/entities/user.entity';
 import {
   Column,
@@ -32,6 +33,9 @@ export class HospitalEntity extends TimeEntity {
 
   @OneToMany(() => DoctorEntity, (doctor) => doctor.hospital)
   doctors: DoctorEntity[];
+
+  @OneToMany(() => InspectorEntity, (inspector) => inspector.hospital)
+  inspectors: InspectorEntity[];
 
   @ManyToOne(() => UserEntity, (user) => user.hospitals)
   @JoinColumn({ name: 'user_id' })
