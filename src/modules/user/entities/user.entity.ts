@@ -3,6 +3,7 @@ import { DoctorEntity } from '@/modules/doctor/entities/doctor.entity';
 import { AvatarsEntity } from '@/modules/file/entities/avatar.entity';
 import { HospitalEntity } from '@/modules/hospital/entities/hospital.entity';
 import { InspectorEntity } from '@/modules/inspector/entities/inspector.entity';
+import { ReviewerEntity } from '@/modules/reviewer/entities/reviewer.entity';
 import {
   Column,
   Entity,
@@ -63,6 +64,9 @@ export class UserEntity extends TimeEntity {
 
   @OneToMany(() => HospitalEntity, (hospital) => hospital.user)
   hospitals: HospitalEntity[];
+
+  @OneToMany(() => ReviewerEntity, (reviewer) => reviewer.user)
+  reviewers: HospitalEntity[];
 
   @OneToMany(() => InspectorEntity, (inspector) => inspector.user)
   inspectors: InspectorEntity[];
