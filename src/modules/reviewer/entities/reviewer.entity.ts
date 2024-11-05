@@ -1,17 +1,19 @@
 import { TimeEntity } from '@/modules/app/entities/app.entity';
 import { HospitalEntity } from '@/modules/hospital/entities/hospital.entity';
+import { IndicatorEntity } from '@/modules/indicator/entities/indicator.entity';
 import { UserEntity } from '@/modules/user/entities/user.entity';
 import {
   Column,
   Entity,
   JoinColumn,
   ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 
 @Entity('reviewer')
 export class ReviewerEntity extends TimeEntity {
-  @PrimaryGeneratedColumn({ type: 'int', comment: '检验id' })
+  @PrimaryGeneratedColumn({ type: 'int', comment: '审核者id' })
   id: number;
 
   @Column({ type: 'varchar', comment: '审核者名字', length: 20 })
@@ -27,4 +29,7 @@ export class ReviewerEntity extends TimeEntity {
   @ManyToOne(() => UserEntity, (user) => user.reviewers)
   @JoinColumn({ name: 'user_id' })
   user: UserEntity;
+
+  @OneToMany(() => IndicatorEntity, (indicator) => indicator.reviewer)
+  indicators: IndicatorEntity[];
 }

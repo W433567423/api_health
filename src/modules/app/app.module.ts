@@ -13,6 +13,7 @@ import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { APP_FILTER, APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { DoctorModule } from '../doctor/doctor.module';
+import { IndicatorModule } from '../indicator/indicator.module';
 import { ReviewerModule } from '../reviewer/reviewer.module';
 
 @Module({
@@ -25,6 +26,7 @@ import { ReviewerModule } from '../reviewer/reviewer.module';
     DoctorModule,
     InspectorModule,
     ReviewerModule,
+    IndicatorModule,
   ],
   controllers: [AppController],
   providers: [

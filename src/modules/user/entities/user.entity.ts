@@ -2,6 +2,7 @@ import { TimeEntity } from '@/modules/app/entities/app.entity';
 import { DoctorEntity } from '@/modules/doctor/entities/doctor.entity';
 import { AvatarsEntity } from '@/modules/file/entities/avatar.entity';
 import { HospitalEntity } from '@/modules/hospital/entities/hospital.entity';
+import { IndicatorEntity } from '@/modules/indicator/entities/indicator.entity';
 import { InspectorEntity } from '@/modules/inspector/entities/inspector.entity';
 import { ReviewerEntity } from '@/modules/reviewer/entities/reviewer.entity';
 import {
@@ -73,4 +74,7 @@ export class UserEntity extends TimeEntity {
 
   @OneToMany(() => DoctorEntity, (doctor) => doctor.user)
   doctors: DoctorEntity[];
+
+  @OneToMany(() => IndicatorEntity, (indicator) => indicator.user)
+  indicators: IndicatorEntity[];
 }
