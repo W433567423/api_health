@@ -23,7 +23,7 @@ export class AppController {
   @NoAuth()
   hallo(): IResData<string> {
     return {
-      data: `<h1>hallo, this is tutu の graduation</h1><hr/><li>the swagger address is <a href="http://localhost:${SERVER_PORT}/${swaggerPrefix}">localhost:${SERVER_PORT}/${swaggerPrefix}</a>;</li>`,
+      data: `<h1>hallo, this is tutu の health</h1><hr/><li>the swagger address is <a href="http://localhost:${SERVER_PORT}/${swaggerPrefix}">localhost:${SERVER_PORT}/${swaggerPrefix}</a>;</li>`,
     };
   }
 }
