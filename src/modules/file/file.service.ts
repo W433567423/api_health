@@ -7,7 +7,7 @@ import * as fs from 'fs';
 import * as path from 'path';
 import { Repository } from 'typeorm';
 import { IReqUser } from '../app';
-import { UserEntity } from '../user/entities/user.entity';
+import { type UserEntity } from '../user/entities/user.entity';
 import { AvatarsEntity } from './entities/avatar.entity';
 
 @Injectable({ scope: Scope.REQUEST })
@@ -17,6 +17,7 @@ export class FileService {
     @InjectRepository(AvatarsEntity)
     private readonly avatarRepository: Repository<AvatarsEntity>,
   ) {}
+
   // 上传用户头像
   async uploadAvatar(user: UserEntity, file: Express.Multer.File) {
     // 上传到cos
@@ -28,10 +29,10 @@ export class FileService {
     isExistDir(uploadPath);
 
     fs.writeFileSync(filePath, file.buffer);
-    const { Location } = (await uploadFile({
+    const { Location } = await uploadFile({
       Key: `graduation/avatar/${user.id}-avatar.png`,
       FilePath: filePath,
-    })) as any;
+    });
     fs.rmSync(filePath);
 
     const dbAvatar = await this.avatarRepository.findOne({
@@ -39,7 +40,7 @@ export class FileService {
         fileUrl: Location,
       },
     });
-    if (dbAvatar) {
+    if (dbAvatar !== null) {
       // 更新数据库中的数据
       dbAvatar.size = String(file.size) + 'bit';
       dbAvatar.mimetype = file.mimetype;
@@ -55,10 +56,5 @@ export class FileService {
 
       return await this.avatarRepository.save(avatar);
     }
-  }
-
-  // 获取用户id
-  getUserId() {
-    return this.request.user!.id;
   }
 }

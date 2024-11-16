@@ -1,6 +1,6 @@
-import { Request } from 'express';
+import { type Request } from 'express';
 
-const getInfoReq = (req: Request): any => {
+const getInfoReq = (req: Request) => {
   const { method, originalUrl: url, body, query, params, ip } = req;
   return {
     method,

@@ -1,5 +1,5 @@
 {
   "extends": [
-    "./node_modules/commitlint-cli/lib/lint"
+    "@commitlint/config-conventional"
   ]
 }

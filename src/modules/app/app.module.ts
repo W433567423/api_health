@@ -9,7 +9,11 @@ import { FileModule } from '@/modules/file/file.module';
 import { HospitalModule } from '@/modules/hospital/hospital.module';
 import { InspectorModule } from '@/modules/inspector/inspector.module';
 import { UserModule } from '@/modules/user/user.module';
-import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
+import {
+  type MiddlewareConsumer,
+  Module,
+  type NestModule,
+} from '@nestjs/common';
 import { APP_FILTER, APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { DoctorModule } from '../doctor/doctor.module';

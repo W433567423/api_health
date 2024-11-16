@@ -1,4 +1,4 @@
-import { CorsOptions } from '@nestjs/common/interfaces/external/cors-options.interface';
+import { type CorsOptions } from '@nestjs/common/interfaces/external/cors-options.interface';
 export const corsConfig: CorsOptions = {
   //  定义了被允许的请求头列表。这里指定了几个常见的请求头（如果请求头里面的自定义字段也要加上去）
   allowedHeaders: [
@@ -10,7 +10,7 @@ export const corsConfig: CorsOptions = {
     'X-Requested-With',
     'Authorization',
   ],
-  //定义了允许跨域访问的来源。可以是一个字符串，也可以是一个字符串数组
+  // 定义了允许跨域访问的来源。可以是一个字符串，也可以是一个字符串数组
   origin: [
     'http://localhost:8003',
     'https://g.wtututu.top',

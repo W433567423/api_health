@@ -17,7 +17,7 @@ import { JwtService } from '@nestjs/jwt';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { IReqUser } from '../app';
-import { AvatarsEntity } from '../file/entities/avatar.entity';
+import { type AvatarsEntity } from '../file/entities/avatar.entity';
 
 @Injectable({ scope: Scope.REQUEST })
 export class UserService {
@@ -27,15 +27,16 @@ export class UserService {
     @InjectRepository(UserEntity)
     private readonly userRepository: Repository<UserEntity>,
 
-    private jwtService: JwtService,
+    private readonly jwtService: JwtService,
   ) {}
+
   // 用户名查询用户
-  async isExistByName(user_name: string, status: 'login' | 'registry') {
-    const user = await this.userRepository.findOne({ where: { user_name } });
-    if (status === 'login' && !user) {
+  async isExistByName(userName: string, status: 'login' | 'registry') {
+    const user = await this.userRepository.findOne({ where: { userName } });
+    if (status === 'login' && user !== null) {
       throw new HttpException('该用户名尚未注册', HttpStatus.FORBIDDEN);
     }
-    if (status === 'registry' && user) {
+    if (status === 'registry' && user !== null) {
       throw new HttpException('该用户名已被注册', HttpStatus.FORBIDDEN);
     }
     return user;
@@ -43,7 +44,7 @@ export class UserService {
 
   // 注册服务
   async registry(
-    user_name: string,
+    userName: string,
     originPassword: string,
     emailValid: string,
     validServer: number,
@@ -52,12 +53,12 @@ export class UserService {
     eqValidNumber(Number(emailValid), validServer);
 
     // 查询该用户名是否注册
-    await this.isExistByName(user_name, 'registry');
+    await this.isExistByName(userName, 'registry');
 
     const password = md5Password(originPassword);
     // 新建用户
     const dbUser = await this.userRepository.save({
-      user_name,
+      userName,
       password,
       email,
     });
@@ -67,14 +68,14 @@ export class UserService {
       user: dbUser,
       token: await this.jwtService.signAsync({
         id: dbUser.id,
-        user_name: dbUser.user_name,
+        userName: dbUser.userName,
       }),
     };
   }
 
   // 登录服务
   async login(
-    user_name: string,
+    userName: string,
     password: string,
     codeValid: string,
     validServer: string,
@@ -82,20 +83,22 @@ export class UserService {
     eqValidString(codeValid, validServer);
 
     // 查询该用户名是否注册
-    const dbUser = (await this.isExistByName(user_name, 'login')) as UserEntity;
+    const dbUser = await this.isExistByName(userName, 'login');
+    if (dbUser !== null) {
+      // 比较密码
+      eqPassword(dbUser.password, md5Password(password));
 
-    // 比较密码
-    eqPassword(dbUser.password, md5Password(password));
-
-    // 登录
-    return {
-      user: dbUser,
-      token: await this.jwtService.signAsync({
-        id: dbUser.id,
-        user_name: dbUser.user_name,
-      }),
-    };
-    // return makeToken(dbUser);
+      // 登录
+      return {
+        user: dbUser,
+        token: await this.jwtService.signAsync({
+          id: dbUser.id,
+          userName: dbUser.userName,
+        }),
+      };
+    } else {
+      throw new HttpException('该用户名尚未注册', HttpStatus.FORBIDDEN);
+    }
   }
 
   // 忘记密码
@@ -112,10 +115,10 @@ export class UserService {
       where: { email },
     });
 
-    if (!dbUser) {
+    if (dbUser === null) {
       throw new HttpException('该邮箱尚未被绑定', HttpStatus.FORBIDDEN);
     } else {
-      this.userRepository.update(dbUser.id, {
+      await this.userRepository.update(dbUser.id, {
         password: md5Password(newPassword),
       });
     }
@@ -123,14 +126,14 @@ export class UserService {
 
   // 获取用户
   async getUser() {
-    if (!this.request.user?.id) {
+    if (this.request.user?.id === undefined) {
       console.log('用户id不存在');
       throw new HttpException('未登录', HttpStatus.UNAUTHORIZED);
     }
     const user = await this.userRepository.findOneBy({
       id: this.request.user?.id,
     });
-    if (!user) {
+    if (user === null) {
       // 理论上不可能
       console.log('找不到用户');
       throw new HttpException('该用户名不存在', HttpStatus.UNAUTHORIZED);
@@ -140,12 +143,19 @@ export class UserService {
 
   // 更新用户头像
   async updateUserAvatar(avatar: AvatarsEntity) {
-    const userId = this.request.user!.id;
+    if (this.request.user?.id === undefined) {
+      throw new HttpException('未登录', HttpStatus.UNAUTHORIZED);
+    }
+    const userId = this.request.user.id;
     const user = await this.userRepository.findOne({
       where: { id: userId },
       relations: ['avatar'],
     });
-    user!.avatar = avatar;
-    return this.userRepository.update(userId, user!);
+    if (user === null) {
+      throw new HttpException('该用户不存在', HttpStatus.UNAUTHORIZED);
+    } else {
+      user.avatar = avatar;
+      return await this.userRepository.update(userId, user);
+    }
   }
 }

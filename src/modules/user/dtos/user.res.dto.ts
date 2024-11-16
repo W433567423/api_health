@@ -1,6 +1,6 @@
 import { successResDto } from '@/modules/app/app.res.dto';
 import { ApiProperty } from '@nestjs/swagger';
-import { UserEntity } from '../entities/user.entity';
+import { type UserEntity } from '../entities/user.entity';
 
 export class userResDto {
   @ApiProperty({
@@ -44,6 +44,7 @@ export class userResDto {
     example: '2024-03-19T03:21:42.353Z',
   })
   readonly createTime: string;
+
   @ApiProperty({
     description: '更新时间',
     example: '2024-03-19T03:21:42.353Z',
@@ -63,7 +64,7 @@ export class userLoginResDto extends successResDto<{
         createTime: '2024-03-19T03:21:42.353Z',
         updateTime: '2024-03-19T03:21:42.353Z',
         id: 1,
-        user_name: 'test',
+        userName: 'test',
         password: 'f379eaf3c831b04de153469d1bec345e',
         phone: null,
         email: 't433567423@163.com',

@@ -4,7 +4,7 @@ import {
   COS_SECRET_ID,
   COS_SECRET_KEY,
 } from '@/config/secret.config';
-import { CosError, UploadFileResult } from 'cos-nodejs-sdk-v5';
+import { type CosError, type UploadFileResult } from 'cos-nodejs-sdk-v5';
 import { createHash } from 'crypto';
 import dayjs from 'dayjs';
 import * as fs from 'fs';
@@ -23,7 +23,7 @@ const md5Password = (password: string) => {
   return createHash('md5').update(password).digest('hex');
 };
 
-const uploadFile = async (config: ICosConfig) => {
+const uploadFile = async (config: ICosConfig): Promise<UploadFileResult> => {
   return await new Promise((resolve, reject) => {
     cos.uploadFile(
       {
@@ -35,7 +35,7 @@ const uploadFile = async (config: ICosConfig) => {
           1024 * 1024 * 5 /* 触发分块上传的阈值，超过5MB使用分块上传，非必须 */,
       },
       (err: CosError, data: UploadFileResult) => {
-        if (err) {
+        if (err !== null) {
           reject(err);
         } else {
           resolve(data);

@@ -6,7 +6,7 @@ interface IResData<T> {
 
 interface IUser {
   id: number;
-  user_name: string;
+  userName: string;
   iat: number;
   exp: number;
 }

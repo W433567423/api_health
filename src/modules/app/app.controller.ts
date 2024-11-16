@@ -5,12 +5,11 @@ import { NoAuth } from '@/global/decorator';
 import { Controller, Get } from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { successResDto } from './app.res.dto';
-import type { IResData } from './index';
+import { IResData } from './index';
 
 @ApiTags('入口')
 @Controller()
 export class AppController {
-  constructor() {}
   @Get()
   @ApiOperation({ summary: '后台系统入口' })
   @ApiResponse({

@@ -19,7 +19,7 @@ export default new ValidationPipe({
     // @ts-expect-error
     const msg = Object.values(errors?.[0]?.constraints)[0];
     return new BadRequestException({
-      msg: msg,
+      msg,
       status: HttpStatus.BAD_REQUEST,
     });
   },

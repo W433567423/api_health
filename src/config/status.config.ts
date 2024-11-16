@@ -1,4 +1,4 @@
-import { ApiResponseOptions } from '@nestjs/swagger';
+import { type ApiResponseOptions } from '@nestjs/swagger';
 
 export const statusFour: ApiResponseOptions = {
   status: '4XX',

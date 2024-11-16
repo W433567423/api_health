@@ -10,12 +10,12 @@ const isExistDir = (path: string, autoCreate = true) => {
 };
 // 创建文件
 const touchFile = async (path: string): Promise<string> => {
-  return new Promise((resolve, rejects) => {
+  return await new Promise((resolve, reject) => {
     try {
       fs.writeFileSync(path, '');
       resolve('文件创建成功');
     } catch (e) {
-      rejects(`文件创建失败,${String(e)}`);
+      reject(new Error(`文件创建失败,${String(e)}`));
     }
   });
 };

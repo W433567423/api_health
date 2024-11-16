@@ -12,8 +12,9 @@ import {
   ApiResponse,
   ApiTags,
 } from '@nestjs/swagger';
-import type { IReqUser, IResData, IUser } from '../app';
-import { UserEntity } from './entities/user.entity';
+import type { IUser } from '../app';
+import { IReqUser, IResData } from '../app';
+import { type UserEntity } from './entities/user.entity';
 import { UserService } from './user.service';
 
 @ApiTags('用户管理')
@@ -32,14 +33,14 @@ export class UserController {
     @Body() signupData: userRegistryReqDto,
     @Session() session: { emailCaptchaServer: number | undefined },
   ): Promise<IResData<{ token: string; user: UserEntity }>> {
-    const { user_name, password, emailValid, emailNum } = signupData;
+    const { userName, password, emailValid, emailNum } = signupData;
     const { emailCaptchaServer } = session;
 
     const res = await this.userService.registry(
-      user_name,
+      userName,
       password,
       emailValid,
-      emailCaptchaServer || 0,
+      emailCaptchaServer ?? 0,
       emailNum,
     );
     return {
@@ -60,18 +61,18 @@ export class UserController {
     @Body() signupData: userLoginReqDto,
     @Session() session: { captcha: string | undefined },
   ): Promise<IResData<{ token: string; user: UserEntity }>> {
-    const { user_name, password, valid } = signupData;
+    const { userName, password, valid } = signupData;
 
     const { captcha } = session;
 
-    return {
-      data: await this.userService.login(
-        user_name,
-        password,
-        valid,
-        captcha || '',
-      ),
-    };
+    const data = await this.userService.login(
+      userName,
+      password,
+      valid,
+      captcha ?? '',
+    );
+
+    return { data };
   }
 
   @ApiOperation({ summary: '用户忘记密码' })
@@ -88,7 +89,7 @@ export class UserController {
       emailNum,
       newPassword,
       emailValid,
-      emailCaptchaServer || 0,
+      emailCaptchaServer ?? 0,
     );
     return { msg: '密码重置成功' };
   }

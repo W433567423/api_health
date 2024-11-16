@@ -21,7 +21,7 @@ export class AuthGuard implements CanActivate {
 
   constructor(
     private readonly reflector: Reflector,
-    private jwtService: JwtService,
+    private readonly jwtService: JwtService,
   ) {}
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
@@ -37,9 +37,9 @@ export class AuthGuard implements CanActivate {
         .switchToRpc()
         .getData()
         .headers?.authorization?.replace('Bearer ', '');
-      if (authorization) {
+      if (typeof authorization === 'string' && authorization.length > 0) {
         try {
-          request['user'] = await this.jwtService.verifyAsync<IUser>(
+          request.user = await this.jwtService.verifyAsync<IUser>(
             authorization,
             {
               secret: jwtSecret,

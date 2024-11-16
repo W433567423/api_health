@@ -30,6 +30,10 @@ async function bootstrap() {
   await app.listen(SERVER_PORT);
 }
 
-bootstrap().then(async () => {
-  console.log(`Server is running on http://localhost:${SERVER_PORT}/api`);
-});
+bootstrap()
+  .then(async () => {
+    console.log(`Server is running on http://localhost:${SERVER_PORT}/api`);
+  })
+  .catch(() => {
+    console.log(`Server error`);
+  });

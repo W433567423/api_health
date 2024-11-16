@@ -1,4 +1,4 @@
-import { WinstonModule, WinstonModuleOptions } from 'nest-winston';
+import { WinstonModule } from 'nest-winston';
 import * as winston from 'winston';
 import 'winston-daily-rotate-file';
 
@@ -20,4 +20,4 @@ export const winstonConfig = WinstonModule.forRoot({
       ),
     }),
   ],
-} as WinstonModuleOptions);
+});
