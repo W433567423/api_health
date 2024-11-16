@@ -7,12 +7,12 @@ import { Readable } from 'stream';
 
 const emailCreateConfig: SMTPTransport.Options = {
   service: emailConfig.service,
-  from: `${emailConfig.alias}<${emailConfig.user_name}>`,
+  from: `${emailConfig.alias}<${emailConfig.username}>`,
   host: emailConfig.host,
   port: emailConfig.port,
   secure: emailConfig.secure,
   auth: {
-    user: emailConfig.user_name,
+    user: emailConfig.username,
     pass: emailConfig.password,
   },
 };
@@ -33,7 +33,7 @@ class Email {
     text?: string | Buffer | Readable | Mail.AttachmentLike | undefined;
   }) {
     const options: SendMailOptions = {
-      from: `${emailConfig.alias}<${emailConfig.user_name}>`,
+      from: `${emailConfig.alias}<${emailConfig.username}>`,
       to: email,
       subject,
       text,
