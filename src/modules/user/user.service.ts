@@ -33,7 +33,7 @@ export class UserService {
   // 用户名查询用户
   async isExistByName(username: string, status: 'login' | 'registry') {
     const user = await this.userRepository.findOne({ where: { username } });
-    if (status === 'login' && user !== null) {
+    if (status === 'login' && user === null) {
       throw new HttpException('该用户名尚未注册', HttpStatus.FORBIDDEN);
     }
     if (status === 'registry' && user !== null) {
@@ -56,13 +56,13 @@ export class UserService {
     await this.isExistByName(username, 'registry');
 
     const password = md5Password(originPassword);
+    console.log('🚀 ~ UserService ~ password:', password);
     // 新建用户
     const dbUser = await this.userRepository.save({
       username,
       password,
       email,
     });
-
     // 登录
     return {
       user: dbUser,
@@ -84,6 +84,7 @@ export class UserService {
 
     // 查询该用户名是否注册
     const dbUser = await this.isExistByName(username, 'login');
+    console.log('🚀 ~ UserService ~ dbUser:', dbUser);
     if (dbUser !== null) {
       // 比较密码
       eqPassword(dbUser.password, md5Password(password));

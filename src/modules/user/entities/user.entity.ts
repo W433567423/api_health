@@ -21,7 +21,7 @@ export class UserEntity extends TimeEntity {
   @Column({ type: 'varchar', comment: '用户名', length: 20 })
   username: string;
 
-  @Column({ type: 'varchar', comment: '密码(加密后)', length: 20 })
+  @Column({ type: 'varchar', comment: '密码(加密后)', length: 40 })
   password: string;
 
   @Column({ type: 'varchar', comment: '性别', length: 6, nullable: true })

@@ -33,7 +33,7 @@ export class UserController {
     @Body() signupData: userRegistryReqDto,
     @Session() session: { emailCaptchaServer: number | undefined },
   ): Promise<IResData<{ token: string; user: UserEntity }>> {
-    const { username, password, emailValid, emailNum } = signupData;
+    const { username, password, emailValid, email } = signupData;
     const { emailCaptchaServer } = session;
 
     const res = await this.userService.registry(
@@ -41,7 +41,7 @@ export class UserController {
       password,
       emailValid,
       emailCaptchaServer ?? 0,
-      emailNum,
+      email,
     );
     return {
       code: 201,
@@ -72,7 +72,7 @@ export class UserController {
       captcha ?? '',
     );
 
-    return { data };
+    return { data, msg: '登录成功' };
   }
 
   @ApiOperation({ summary: '用户忘记密码' })

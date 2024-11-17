@@ -1,12 +1,11 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsEmail, IsNotEmpty } from 'class-validator';
-export class userDefaultReqDto {
+
+export class userRegistryReqDto {
   @ApiProperty({ description: '用户名', example: 'test' })
   @IsNotEmpty({ message: '用户名不能为空' })
   readonly username: string;
-}
 
-export class userRegistryReqDto extends userDefaultReqDto {
   @ApiProperty({
     description: '密码',
     example: '666666',
@@ -27,10 +26,14 @@ export class userRegistryReqDto extends userDefaultReqDto {
   })
   @IsEmail()
   @IsNotEmpty({ message: '邮箱不能为空' })
-  readonly emailNum: string;
+  readonly email: string;
 }
 
-export class userLoginReqDto extends userDefaultReqDto {
+export class userLoginReqDto {
+  @ApiProperty({ description: '用户名', example: 'test' })
+  @IsNotEmpty({ message: '用户名不能为空' })
+  readonly username: string;
+
   @ApiProperty({
     description: '密码',
     example: '666666',
