@@ -33,11 +33,11 @@ export class UserController {
     @Body() signupData: userRegistryReqDto,
     @Session() session: { emailCaptchaServer: number | undefined },
   ): Promise<IResData<{ token: string; user: UserEntity }>> {
-    const { userName, password, emailValid, emailNum } = signupData;
+    const { username, password, emailValid, emailNum } = signupData;
     const { emailCaptchaServer } = session;
 
     const res = await this.userService.registry(
-      userName,
+      username,
       password,
       emailValid,
       emailCaptchaServer ?? 0,
@@ -61,12 +61,12 @@ export class UserController {
     @Body() signupData: userLoginReqDto,
     @Session() session: { captcha: string | undefined },
   ): Promise<IResData<{ token: string; user: UserEntity }>> {
-    const { userName, password, valid } = signupData;
+    const { username, password, valid } = signupData;
 
     const { captcha } = session;
 
     const data = await this.userService.login(
-      userName,
+      username,
       password,
       valid,
       captcha ?? '',

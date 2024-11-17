@@ -31,8 +31,8 @@ export class UserService {
   ) {}
 
   // 用户名查询用户
-  async isExistByName(userName: string, status: 'login' | 'registry') {
-    const user = await this.userRepository.findOne({ where: { userName } });
+  async isExistByName(username: string, status: 'login' | 'registry') {
+    const user = await this.userRepository.findOne({ where: { username } });
     if (status === 'login' && user !== null) {
       throw new HttpException('该用户名尚未注册', HttpStatus.FORBIDDEN);
     }
@@ -44,7 +44,7 @@ export class UserService {
 
   // 注册服务
   async registry(
-    userName: string,
+    username: string,
     originPassword: string,
     emailValid: string,
     validServer: number,
@@ -53,12 +53,12 @@ export class UserService {
     eqValidNumber(Number(emailValid), validServer);
 
     // 查询该用户名是否注册
-    await this.isExistByName(userName, 'registry');
+    await this.isExistByName(username, 'registry');
 
     const password = md5Password(originPassword);
     // 新建用户
     const dbUser = await this.userRepository.save({
-      userName,
+      username,
       password,
       email,
     });
@@ -68,14 +68,14 @@ export class UserService {
       user: dbUser,
       token: await this.jwtService.signAsync({
         id: dbUser.id,
-        userName: dbUser.userName,
+        username: dbUser.username,
       }),
     };
   }
 
   // 登录服务
   async login(
-    userName: string,
+    username: string,
     password: string,
     codeValid: string,
     validServer: string,
@@ -83,7 +83,7 @@ export class UserService {
     eqValidString(codeValid, validServer);
 
     // 查询该用户名是否注册
-    const dbUser = await this.isExistByName(userName, 'login');
+    const dbUser = await this.isExistByName(username, 'login');
     if (dbUser !== null) {
       // 比较密码
       eqPassword(dbUser.password, md5Password(password));
@@ -93,7 +93,7 @@ export class UserService {
         user: dbUser,
         token: await this.jwtService.signAsync({
           id: dbUser.id,
-          userName: dbUser.userName,
+          username: dbUser.username,
         }),
       };
     } else {

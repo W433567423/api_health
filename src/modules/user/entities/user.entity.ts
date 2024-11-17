@@ -19,7 +19,7 @@ export class UserEntity extends TimeEntity {
   id: number;
 
   @Column({ type: 'varchar', comment: '用户名', length: 20 })
-  userName: string;
+  username: string;
 
   @Column({ type: 'varchar', comment: '密码(加密后)', length: 20 })
   password: string;

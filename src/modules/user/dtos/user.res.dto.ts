@@ -64,7 +64,7 @@ export class userLoginResDto extends successResDto<{
         createTime: '2024-03-19T03:21:42.353Z',
         updateTime: '2024-03-19T03:21:42.353Z',
         id: 1,
-        userName: 'test',
+        username: 'test',
         password: 'f379eaf3c831b04de153469d1bec345e',
         phone: null,
         email: 't433567423@163.com',
