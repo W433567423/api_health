@@ -12,9 +12,9 @@ export const corsConfig: CorsOptions = {
   ],
   // 定义了允许跨域访问的来源。可以是一个字符串，也可以是一个字符串数组
   origin: [
-    'http://localhost:8003',
-    'https://g.wtututu.top',
-    'http://g.wtututu.top',
+    'http://localhost:8001',
+    'https://h.wtututu.top',
+    'http://h.wtututu.top',
   ],
   // 指定了是否允许跨域请求携带认证信息，如 Cookies、Authorization 等
   credentials: true,
