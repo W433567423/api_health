@@ -6,10 +6,11 @@
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
-    "prepare": "npx prettier --write --end-of-line lf src && husky install",
+    "prepare": "husky install&& npx run fix:lf",
     "commitlint": "commitlint -e -V",
+    "fix:lf": "npx prettier --write --end-of-line lf src",
     "build": "nest build",
-    "fix": "eslint --ext .js,.ts --fix src",
+    "fix": "eslint --ext .js,.ts --fix src && npx run fix:lf",
     "start": "nest start",
     "start:dev": "clear && nest start --watch",
     "start:debug": "nest start --debug --watch",
