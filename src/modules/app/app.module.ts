@@ -7,7 +7,6 @@ import LoggerMiddleware from '@/global/middleware/logger.middleware';
 import { AppController } from '@/modules/app/app.controller';
 import { FileModule } from '@/modules/file/file.module';
 import { HospitalModule } from '@/modules/hospital/hospital.module';
-import { InspectorModule } from '@/modules/inspector/inspector.module';
 import { UserModule } from '@/modules/user/user.module';
 import {
   type MiddlewareConsumer,
@@ -17,8 +16,6 @@ import {
 import { APP_FILTER, APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { DoctorModule } from '../doctor/doctor.module';
-import { IndicatorModule } from '../indicator/indicator.module';
-import { ReviewerModule } from '../reviewer/reviewer.module';
 
 @Module({
   imports: [
@@ -28,9 +25,6 @@ import { ReviewerModule } from '../reviewer/reviewer.module';
     FileModule,
     HospitalModule,
     DoctorModule,
-    InspectorModule,
-    ReviewerModule,
-    IndicatorModule,
   ],
   controllers: [AppController],
   providers: [
