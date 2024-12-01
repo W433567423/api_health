@@ -1,5 +1,6 @@
-import { Controller, Get, Req } from '@nestjs/common';
+import { Body, Controller, Get, Post, Req } from '@nestjs/common';
 import { ApiOperation } from '@nestjs/swagger';
+import { IHospital } from '.';
 import { IReqUser, type IResData } from '../app';
 import { type HospitalEntity } from './entities/hospital.entity';
 import { HospitalService } from './hospital.service';
@@ -16,6 +17,21 @@ export class HospitalController {
     const userId = req.user.id;
     const hospitals = await this.hospitalService.getExistHospital(userId);
     console.log('🚀 ~ HospitalController ~ getExistHospital ~ userId:', userId);
-    return { msg: '获取医院成功', data: hospitals };
+    return { msg: '获取已有医院成功', data: hospitals };
+  }
+
+  @ApiOperation({ summary: '添加一个医院' })
+  @Post('addHospital')
+  async addHospital(
+    @Req() req: IReqUser,
+    @Body() body: IHospital,
+  ): Promise<IResData<HospitalEntity[]>> {
+    const userId = req.user.id;
+    // add
+
+    await this.hospitalService.addHospital(userId, body);
+    const hospitals = await this.hospitalService.getExistHospital(userId);
+    console.log('🚀 ~ HospitalController ~ getExistHospital ~ userId:', userId);
+    return { msg: '添加医院成功', data: hospitals };
   }
 }
