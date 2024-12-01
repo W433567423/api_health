@@ -8,10 +8,10 @@ export class HospitalEntity extends TimeEntity {
   id: number;
 
   @Column({ type: 'varchar', comment: '医院名字', length: 20 })
-  hospital_name: string;
+  hospitalName: string;
 
-  @Column({ type: 'int', comment: '区域码' })
-  address_code: number;
+  @Column({ type: 'varchar', comment: '区域码', length: 6 })
+  addressCode: string;
 
   @Column({ type: 'varchar', comment: '别名', length: 20 })
   alias: string;

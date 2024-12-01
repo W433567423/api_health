@@ -15,8 +15,8 @@ export class HospitalService {
   async addHospital(userId: number, body: AddHospitalReqDto) {
     const { hospitalName, addressCode, alias, level } = body;
     const newHospital = new HospitalEntity();
-    newHospital.hospital_name = hospitalName;
-    newHospital.address_code = addressCode;
+    newHospital.hospitalName = hospitalName;
+    newHospital.addressCode = addressCode;
     newHospital.alias = alias;
     newHospital.level = level;
     newHospital.user_id = userId;

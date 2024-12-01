@@ -28,8 +28,8 @@ export class AddHospitalReqDto {
 
   @ApiProperty({
     description: '地区码',
-    example: 421127,
+    example: '421127',
   })
   @IsNotEmpty({ message: '地区码不能为空' })
-  readonly addressCode: number;
+  readonly addressCode: string;
 }
