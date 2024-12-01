@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { type IHospital } from '.';
+import { type AddHospitalReqDto } from './dtos/hospital.req.dto';
 import { HospitalEntity } from './entities/hospital.entity';
 
 @Injectable()
@@ -12,7 +12,7 @@ export class HospitalService {
   ) {}
 
   // 添加一个医院
-  async addHospital(userId: number, body: IHospital) {
+  async addHospital(userId: number, body: AddHospitalReqDto) {
     const { hospitalName, addressCode, alias, level } = body;
     const newHospital = new HospitalEntity();
     newHospital.hospital_name = hospitalName;
@@ -20,6 +20,7 @@ export class HospitalService {
     newHospital.alias = alias;
     newHospital.level = level;
     newHospital.user_id = userId;
+    newHospital.nature = body?.nature ?? '未知';
     await this.hospitalRepository.save(newHospital);
   }
 

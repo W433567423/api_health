@@ -1,7 +1,7 @@
 import { Body, Controller, Get, Post, Req } from '@nestjs/common';
 import { ApiOperation } from '@nestjs/swagger';
-import { IHospital } from '.';
 import { IReqUser, type IResData } from '../app';
+import { AddHospitalReqDto } from './dtos/hospital.req.dto';
 import { type HospitalEntity } from './entities/hospital.entity';
 import { HospitalService } from './hospital.service';
 
@@ -24,11 +24,9 @@ export class HospitalController {
   @Post('addHospital')
   async addHospital(
     @Req() req: IReqUser,
-    @Body() body: IHospital,
+    @Body() body: AddHospitalReqDto,
   ): Promise<IResData<HospitalEntity[]>> {
     const userId = req.user.id;
-    // add
-
     await this.hospitalService.addHospital(userId, body);
     const hospitals = await this.hospitalService.getExistHospital(userId);
     console.log('🚀 ~ HospitalController ~ getExistHospital ~ userId:', userId);
