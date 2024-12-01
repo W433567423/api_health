@@ -13,13 +13,13 @@ export class HospitalEntity extends TimeEntity {
   @Column({ type: 'varchar', comment: '区域码', length: 6 })
   addressCode: string;
 
-  @Column({ type: 'varchar', comment: '别名', length: 20 })
+  @Column({ type: 'varchar', comment: '别名', length: 20, nullable: true })
   alias: string;
 
   @Column({ type: 'varchar', comment: '级别', length: 6 })
   level: string;
 
-  @Column({ type: 'varchar', comment: '医院性质', length: 10 })
+  @Column({ type: 'varchar', comment: '医院性质', length: 10, nullable: true })
   nature: string;
 
   @OneToMany(() => DoctorEntity, (doctor) => doctor.hospital)

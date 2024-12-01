@@ -10,8 +10,7 @@ export class AddHospitalReqDto {
     description: '别名',
     example: 'test',
   })
-  @IsNotEmpty({ message: '别名不能为空' })
-  readonly alias: string;
+  readonly alias?: string;
 
   @ApiProperty({
     description: '级别',
