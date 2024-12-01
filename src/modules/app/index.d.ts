@@ -12,6 +12,6 @@ interface IUser {
 }
 
 interface IReqUser extends Request {
-  user?: IUser;
+  user: IUser;
 }
 export type { IReqUser, IResData, IUser };

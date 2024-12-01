@@ -1,7 +1,6 @@
 import { TimeEntity } from '@/modules/app/entities/app.entity';
 import { DoctorEntity } from '@/modules/doctor/entities/doctor.entity';
 import { AvatarsEntity } from '@/modules/file/entities/avatar.entity';
-import { HospitalEntity } from '@/modules/hospital/entities/hospital.entity';
 import {
   Column,
   Entity,
@@ -69,9 +68,6 @@ export class UserEntity extends TimeEntity {
 
   @OneToOne(() => AvatarsEntity, (avatar) => avatar.user)
   avatar: AvatarsEntity;
-
-  @OneToMany(() => HospitalEntity, (hospital) => hospital.user)
-  hospitals: HospitalEntity[];
 
   @OneToMany(() => DoctorEntity, (doctor) => doctor.user)
   doctors: DoctorEntity[];
