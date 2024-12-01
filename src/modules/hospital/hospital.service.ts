@@ -17,7 +17,7 @@ export class HospitalService {
     const newHospital = new HospitalEntity();
     newHospital.hospitalName = hospitalName;
     newHospital.addressCode = addressCode;
-    newHospital.alias = alias;
+    newHospital.alias = alias ?? '';
     newHospital.level = level;
     newHospital.user_id = userId;
     newHospital.nature = body?.nature ?? '未知';
