@@ -19,7 +19,7 @@ export class HospitalService {
     newHospital.addressCode = addressCode;
     newHospital.alias = alias ?? '';
     newHospital.level = level;
-    newHospital.user_id = userId;
+    newHospital.userId = userId;
     newHospital.nature = body?.nature ?? '未知';
     await this.hospitalRepository.save(newHospital);
   }
@@ -27,7 +27,7 @@ export class HospitalService {
   // 获取已有医院列表
   async getExistHospital(userId: number) {
     const dbRes = await this.hospitalRepository.find({
-      where: { user_id: userId },
+      where: { userId },
     });
 
     return dbRes;

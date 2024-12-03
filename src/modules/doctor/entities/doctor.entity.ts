@@ -1,30 +1,20 @@
 import { TimeEntity } from '@/modules/app/entities/app.entity';
-import { HospitalEntity } from '@/modules/hospital/entities/hospital.entity';
-import { UserEntity } from '@/modules/user/entities/user.entity';
-import {
-  Column,
-  Entity,
-  JoinColumn,
-  ManyToOne,
-  PrimaryGeneratedColumn,
-} from 'typeorm';
+import { Column, Entity } from 'typeorm';
 
 @Entity('doctor')
 export class DoctorEntity extends TimeEntity {
-  @PrimaryGeneratedColumn({ type: 'int', comment: '医生id' })
-  id: number;
-
   @Column({ type: 'varchar', comment: '医生名字', length: 20 })
-  doctor_name: string;
+  doctorName: string;
 
   @Column({ type: 'varchar', comment: '性别', length: 1, nullable: true })
   six?: string;
 
-  @ManyToOne(() => HospitalEntity, (hospital) => hospital.doctors)
-  @JoinColumn({ name: 'hospital_id' })
-  hospital: HospitalEntity;
+  @Column({ type: 'varchar', comment: '职位', length: 10, nullable: true })
+  post?: string;
 
-  @ManyToOne(() => UserEntity, (user) => user.doctors)
-  @JoinColumn({ name: 'user_id' })
-  user: UserEntity;
+  @Column({ type: 'int', comment: '医院id' })
+  hospitalId: number;
+
+  @Column({ type: 'int', comment: '用户id' })
+  userId: number;
 }

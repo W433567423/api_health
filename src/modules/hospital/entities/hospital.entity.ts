@@ -1,12 +1,8 @@
 import { TimeEntity } from '@/modules/app/entities/app.entity';
-import { DoctorEntity } from '@/modules/doctor/entities/doctor.entity';
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity } from 'typeorm';
 
 @Entity('hospital')
 export class HospitalEntity extends TimeEntity {
-  @PrimaryGeneratedColumn({ type: 'int', comment: '医院id' })
-  id: number;
-
   @Column({ type: 'varchar', comment: '医院名字', length: 20 })
   hospitalName: string;
 
@@ -22,9 +18,6 @@ export class HospitalEntity extends TimeEntity {
   @Column({ type: 'varchar', comment: '医院性质', length: 10, nullable: true })
   nature: string;
 
-  @OneToMany(() => DoctorEntity, (doctor) => doctor.hospital)
-  doctors: DoctorEntity[];
-
   @Column({ type: 'int', comment: '用户id' })
-  user_id: number;
+  userId: number;
 }

@@ -1,19 +1,9 @@
 import { TimeEntity } from '@/modules/app/entities/app.entity';
-import { DoctorEntity } from '@/modules/doctor/entities/doctor.entity';
 import { AvatarsEntity } from '@/modules/file/entities/avatar.entity';
-import {
-  Column,
-  Entity,
-  OneToMany,
-  OneToOne,
-  PrimaryGeneratedColumn,
-} from 'typeorm';
+import { Column, Entity, OneToOne } from 'typeorm';
 
 @Entity('user')
 export class UserEntity extends TimeEntity {
-  @PrimaryGeneratedColumn({ type: 'int', comment: '用户id' })
-  id: number;
-
   @Column({ type: 'varchar', comment: '用户名', length: 20 })
   username: string;
 
@@ -51,10 +41,10 @@ export class UserEntity extends TimeEntity {
   })
   email?: string;
 
-  @Column({ type: 'varchar', comment: '省份', length: 10, nullable: true })
+  @Column({ type: 'varchar', comment: '现居省份', length: 10, nullable: true })
   province?: string;
 
-  @Column({ type: 'varchar', comment: '城市', length: 10, nullable: true })
+  @Column({ type: 'varchar', comment: '现居城市', length: 10, nullable: true })
   city?: string;
 
   @Column({ type: 'varchar', comment: '详细地址', length: 40, nullable: true })
@@ -68,7 +58,4 @@ export class UserEntity extends TimeEntity {
 
   @OneToOne(() => AvatarsEntity, (avatar) => avatar.user)
   avatar: AvatarsEntity;
-
-  @OneToMany(() => DoctorEntity, (doctor) => doctor.user)
-  doctors: DoctorEntity[];
 }

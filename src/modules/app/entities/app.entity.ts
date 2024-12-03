@@ -2,11 +2,15 @@ import {
   BaseEntity,
   CreateDateColumn,
   Entity,
+  PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 
 @Entity()
 export class TimeEntity extends BaseEntity {
+  @PrimaryGeneratedColumn({ type: 'int', comment: 'id' })
+  id: number;
+
   @CreateDateColumn({
     type: 'timestamp',
     comment: '创建时间(s)',
