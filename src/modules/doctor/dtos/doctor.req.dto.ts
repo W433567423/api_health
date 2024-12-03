@@ -13,13 +13,6 @@ export class AddDoctorReqDto {
   readonly six?: string;
 
   @ApiProperty({
-    description: '职位',
-    example: '普通医生',
-  })
-  @IsNotEmpty({ message: '职位不能为空' })
-  readonly post: string;
-
-  @ApiProperty({
     description: '医院id',
     example: 1,
   })

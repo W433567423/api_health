@@ -13,11 +13,10 @@ export class DoctorService {
 
   // 添加一个医院
   async addDoctor(userId: number, body: AddDoctorReqDto) {
-    const { doctorName, six, post, hospitalId } = body;
+    const { doctorName, six, hospitalId } = body;
     const newDoctor = new DoctorEntity();
     newDoctor.doctorName = doctorName;
     newDoctor.six = six ?? '';
-    newDoctor.post = post;
     newDoctor.hospitalId = hospitalId;
     newDoctor.userId = userId;
     await this.hospitalRepository.save(newDoctor);

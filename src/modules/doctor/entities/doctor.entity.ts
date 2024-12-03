@@ -9,9 +9,6 @@ export class DoctorEntity extends TimeEntity {
   @Column({ type: 'varchar', comment: '性别', length: 1, nullable: true })
   six?: string;
 
-  @Column({ type: 'varchar', comment: '职位', length: 10, nullable: true })
-  post?: string;
-
   @Column({ type: 'int', comment: '医院id' })
   hospitalId: number;
 
