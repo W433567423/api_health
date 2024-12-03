@@ -16,7 +16,6 @@ export class HospitalController {
   ): Promise<IResData<HospitalEntity[]>> {
     const userId = req.user.id;
     const hospitals = await this.hospitalService.getExistHospital(userId);
-    console.log('🚀 ~ HospitalController ~ getExistHospital ~ userId:', userId);
     return { msg: '获取已有医院成功', data: hospitals };
   }
 
@@ -29,7 +28,6 @@ export class HospitalController {
     const userId = req.user.id;
     await this.hospitalService.addHospital(userId, body);
     const hospitals = await this.hospitalService.getExistHospital(userId);
-    console.log('🚀 ~ HospitalController ~ getExistHospital ~ userId:', userId);
     return { msg: '添加医院成功', data: hospitals };
   }
 }

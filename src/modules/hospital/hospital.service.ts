@@ -29,7 +29,6 @@ export class HospitalService {
     const dbRes = await this.hospitalRepository.find({
       where: { user_id: userId },
     });
-    console.log('🚀 ~ HospitalService ~ getExistHospital ~ userId:', userId);
 
     return dbRes;
   }
