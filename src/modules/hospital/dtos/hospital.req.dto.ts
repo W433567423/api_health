@@ -32,3 +32,9 @@ export class AddHospitalReqDto {
   @IsNotEmpty({ message: '地区码不能为空' })
   readonly addressCode: string;
 }
+
+export class DeleteHospitalReqDto {
+  @ApiProperty({ description: '医院id', example: 1 })
+  @IsNotEmpty({ message: '医院id不能为空' })
+  readonly hospitalId: number;
+}

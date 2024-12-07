@@ -1,7 +1,10 @@
 import { Body, Controller, Get, Post, Req } from '@nestjs/common';
 import { ApiOperation } from '@nestjs/swagger';
 import { IReqUser, type IResData } from '../app';
-import { AddHospitalReqDto } from './dtos/hospital.req.dto';
+import {
+  AddHospitalReqDto,
+  DeleteHospitalReqDto,
+} from './dtos/hospital.req.dto';
 import { type HospitalEntity } from './entities/hospital.entity';
 import { HospitalService } from './hospital.service';
 
@@ -29,5 +32,17 @@ export class HospitalController {
     await this.hospitalService.addHospital(userId, body);
     const hospitals = await this.hospitalService.getExistHospital(userId);
     return { msg: '添加医院成功', data: hospitals };
+  }
+
+  @ApiOperation({ summary: '删除一个医院' })
+  @Post('deleteHospital')
+  async deleteHospital(
+    @Req() req: IReqUser,
+    @Body() body: DeleteHospitalReqDto,
+  ): Promise<IResData<HospitalEntity[]>> {
+    const userId = req.user.id;
+    await this.hospitalService.deleteHospital(userId, body.hospitalId);
+    const hospitals = await this.hospitalService.getExistHospital(userId);
+    return { msg: '删除医院成功', data: hospitals };
   }
 }
