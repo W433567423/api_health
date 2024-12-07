@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post, Req } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Post, Req } from '@nestjs/common';
 import { ApiOperation } from '@nestjs/swagger';
 import { IReqUser, type IResData } from '../app';
 import {
@@ -35,7 +35,7 @@ export class HospitalController {
   }
 
   @ApiOperation({ summary: '删除一个医院' })
-  @Post('deleteHospital')
+  @Delete('deleteHospital')
   async deleteHospital(
     @Req() req: IReqUser,
     @Body() body: DeleteHospitalReqDto,
