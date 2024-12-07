@@ -19,3 +19,9 @@ export class AddDoctorReqDto {
   @IsNotEmpty({ message: '医院id不能为空' })
   readonly hospitalId: number;
 }
+
+export class DeleteDoctorReqDto {
+  @ApiProperty({ description: '医生id', example: 1 })
+  @IsNotEmpty({ message: '医生id不能为空' })
+  readonly doctorId: number;
+}

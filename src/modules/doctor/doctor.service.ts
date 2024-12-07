@@ -22,6 +22,12 @@ export class DoctorService {
     await this.hospitalRepository.save(newDoctor);
   }
 
+  // 删除一个医院
+  async deleteDoctor(userId: number, doctorId: number) {
+    await this.hospitalRepository.delete({ userId, id: doctorId });
+    return await this.getExistDoctor(userId);
+  }
+
   // 获取已有医院列表
   async getExistDoctor(userId: number) {
     const dbRes = await this.hospitalRepository.find({

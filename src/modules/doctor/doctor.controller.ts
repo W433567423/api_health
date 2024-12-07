@@ -1,8 +1,8 @@
-import { Body, Controller, Get, Post, Req } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Post, Req } from '@nestjs/common';
 import { ApiOperation } from '@nestjs/swagger';
 import { IReqUser, type IResData } from '../app';
 import { DoctorService } from './doctor.service';
-import { AddDoctorReqDto } from './dtos/doctor.req.dto';
+import { AddDoctorReqDto, DeleteDoctorReqDto } from './dtos/doctor.req.dto';
 import { type DoctorEntity } from './entities/doctor.entity';
 
 @Controller('doctor')
@@ -27,7 +27,19 @@ export class DoctorController {
   ): Promise<IResData<DoctorEntity[]>> {
     const userId = req.user.id;
     await this.doctorService.addDoctor(userId, body);
-    const hospitals = await this.doctorService.getExistDoctor(userId);
-    return { msg: '添加医生成功', data: hospitals };
+    const doctors = await this.doctorService.getExistDoctor(userId);
+    return { msg: '添加医生成功', data: doctors };
+  }
+
+  @ApiOperation({ summary: '删除一个医生' })
+  @Delete('deleteDoctor')
+  async deleteDoctor(
+    @Req() req: IReqUser,
+    @Body() body: DeleteDoctorReqDto,
+  ): Promise<IResData<DoctorEntity[]>> {
+    const userId = req.user.id;
+    await this.doctorService.deleteDoctor(userId, body.doctorId);
+    const doctors = await this.doctorService.getExistDoctor(userId);
+    return { msg: '删除医生成功', data: doctors };
   }
 }
