@@ -1,4 +1,12 @@
-import { Body, Controller, Delete, Get, Post, Req } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Req,
+} from '@nestjs/common';
 import { ApiOperation } from '@nestjs/swagger';
 import { IReqUser, type IResData } from '../app';
 import { DoctorService } from './doctor.service';
@@ -32,13 +40,13 @@ export class DoctorController {
   }
 
   @ApiOperation({ summary: '删除一个医生' })
-  @Delete('deleteDoctor')
+  @Delete('deleteDoctor/:doctorId')
   async deleteDoctor(
     @Req() req: IReqUser,
-    @Body() body: DeleteDoctorReqDto,
+    @Param() param: DeleteDoctorReqDto,
   ): Promise<IResData<DoctorEntity[]>> {
     const userId = req.user.id;
-    await this.doctorService.deleteDoctor(userId, body.doctorId);
+    await this.doctorService.deleteDoctor(userId, param.doctorId);
     const doctors = await this.doctorService.getExistDoctor(userId);
     return { msg: '删除医生成功', data: doctors };
   }
