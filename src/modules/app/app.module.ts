@@ -15,13 +15,12 @@ import {
 } from '@nestjs/common';
 import { APP_FILTER, APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { type TypeOrmModuleOptions } from '@nestjs/typeorm/dist/interfaces/typeorm-options.interface';
 import { DoctorModule } from '../doctor/doctor.module';
 
 @Module({
   imports: [
     winstonConfig,
-    TypeOrmModule.forRoot(MySQLConfig as TypeOrmModuleOptions),
+    TypeOrmModule.forRoot(MySQLConfig),
     UserModule,
     FileModule,
     HospitalModule,
