@@ -84,7 +84,6 @@ export class UserService {
 
     // 查询该用户名是否注册
     const dbUser = await this.isExistByName(username, 'login');
-    console.log('🚀 ~ UserService ~ dbUser:', dbUser);
     if (dbUser !== null) {
       // 比较密码
       eqPassword(dbUser.password, md5Password(password));
