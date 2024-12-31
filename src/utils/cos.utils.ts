@@ -3,7 +3,7 @@ import {
   COS_BUCKET_REGION,
   COS_SECRET_ID,
   COS_SECRET_KEY,
-} from '@/config/secret.config';
+} from '../../../secret.config';
 import { type CosError, type UploadFileResult } from 'cos-nodejs-sdk-v5';
 import { createHash } from 'crypto';
 import dayjs from 'dayjs';

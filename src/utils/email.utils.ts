@@ -1,4 +1,4 @@
-import { emailConfig } from '@/config/secret.config';
+import { emailConfig } from '../../../secret.config';
 import * as NodeMail from 'nodemailer';
 import { type SendMailOptions } from 'nodemailer';
 import type Mail from 'nodemailer/lib//mailer';
