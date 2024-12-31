@@ -1,4 +1,4 @@
-import { MySQLConfig } from '@/config/secret.config';
+import { MySQLConfig } from '../../../../secret.config';
 import { winstonConfig } from '@/config/winston.config';
 import UnifyExceptionFilter from '@/global/filter/uinify-exception.filter';
 import { AuthGuard } from '@/global/guard/auth.guard';
