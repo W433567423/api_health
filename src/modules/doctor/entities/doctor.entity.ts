@@ -4,14 +4,14 @@ import { Column, Entity } from 'typeorm';
 @Entity('doctor')
 export class DoctorEntity extends TimeEntity {
   @Column({ type: 'varchar', comment: '医生名字', length: 20 })
-  doctorName: string;
+  doctor_name: string;
 
   @Column({ type: 'varchar', comment: '性别', length: 1, nullable: true })
   six?: string;
 
   @Column({ type: 'int', comment: '医院id' })
-  hospitalId: number;
+  hospital_id: number;
 
   @Column({ type: 'int', comment: '用户id' })
-  userId: number;
+  user_id: number;
 }

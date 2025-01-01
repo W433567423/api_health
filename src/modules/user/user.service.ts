@@ -32,7 +32,9 @@ export class UserService {
 
   // 用户名查询用户
   async isExistByName(username: string, status: 'login' | 'registry') {
-    const user = await this.userRepository.findOne({ where: { username } });
+    const user = await this.userRepository.findOne({
+      where: { user_name: username },
+    });
     if (status === 'login' && user === null) {
       throw new HttpException('该用户名尚未注册', HttpStatus.FORBIDDEN);
     }
@@ -86,14 +88,14 @@ export class UserService {
     const dbUser = await this.isExistByName(username, 'login');
     if (dbUser !== null) {
       // 比较密码
-      eqPassword(dbUser.password, md5Password(password));
+      eqPassword(dbUser.pass_word, md5Password(password));
 
       // 登录
       return {
         user: dbUser,
         token: await this.jwtService.signAsync({
           id: dbUser.id,
-          username: dbUser.username,
+          username: dbUser.user_name,
         }),
       };
     } else {
@@ -119,7 +121,7 @@ export class UserService {
       throw new HttpException('该邮箱尚未被绑定', HttpStatus.FORBIDDEN);
     } else {
       await this.userRepository.update(dbUser.id, {
-        password: md5Password(newPassword),
+        pass_word: md5Password(newPassword),
       });
     }
   }

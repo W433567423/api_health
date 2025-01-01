@@ -15,25 +15,25 @@ export class HospitalService {
   async addHospital(userId: number, body: AddHospitalReqDto) {
     const { hospitalName, addressCode, alias, level } = body;
     const newHospital = new HospitalEntity();
-    newHospital.hospitalName = hospitalName;
-    newHospital.addressCode = addressCode;
+    newHospital.hospital_name = hospitalName;
+    newHospital.address_code = addressCode;
     newHospital.alias = alias ?? '';
     newHospital.level = level;
-    newHospital.userId = userId;
+    newHospital.user_id = userId;
     newHospital.nature = body?.nature ?? '未知';
     await this.hospitalRepository.save(newHospital);
   }
 
   // 删除一个医院
   async deleteHospital(userId: number, hospitalId: number) {
-    await this.hospitalRepository.delete({ userId, id: hospitalId });
+    await this.hospitalRepository.delete({ user_id: userId, id: hospitalId });
     return await this.getExistHospital(userId);
   }
 
   // 获取已有医院列表
   async getExistHospital(userId: number) {
     const dbRes = await this.hospitalRepository.find({
-      where: { userId },
+      where: { user_id: userId },
     });
 
     return dbRes;

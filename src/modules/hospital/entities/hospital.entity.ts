@@ -4,10 +4,10 @@ import { Column, Entity } from 'typeorm';
 @Entity('hospital')
 export class HospitalEntity extends TimeEntity {
   @Column({ type: 'varchar', comment: '医院名字', length: 20 })
-  hospitalName: string;
+  hospital_name: string;
 
   @Column({ type: 'varchar', comment: '区域码', length: 6 })
-  addressCode: string;
+  address_code: string;
 
   @Column({ type: 'varchar', comment: '别名', length: 20, nullable: true })
   alias: string;
@@ -19,5 +19,5 @@ export class HospitalEntity extends TimeEntity {
   nature: string;
 
   @Column({ type: 'int', comment: '用户id' })
-  userId: number;
+  user_id: number;
 }

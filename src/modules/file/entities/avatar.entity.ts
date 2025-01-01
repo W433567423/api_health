@@ -5,18 +5,16 @@ import { Column, Entity, JoinColumn, OneToOne } from 'typeorm';
 @Entity('avatar')
 export class AvatarsEntity extends TimeEntity {
   @Column({ type: 'varchar', comment: '远程文件地址' })
-  fileUrl: string;
+  file_url: string;
 
   @Column({
     type: 'varchar',
-    name: 'mimetype',
     comment: '文件类型',
   })
-  mimetype: string;
+  mime_type: string;
 
   @Column({
     type: 'varchar',
-    name: 'size',
     comment: '文件大小(bit)',
   })
   size: string;

@@ -37,22 +37,22 @@ export class FileService {
 
     const dbAvatar = await this.avatarRepository.findOne({
       where: {
-        fileUrl: Location,
+        file_url: Location,
       },
     });
     if (dbAvatar !== null) {
       // 更新数据库中的数据
       dbAvatar.size = String(file.size) + 'bit';
-      dbAvatar.mimetype = file.mimetype;
-      dbAvatar.fileUrl = Location;
+      dbAvatar.mime_type = file.mimetype;
+      dbAvatar.file_url = Location;
       await this.avatarRepository.update(dbAvatar.id, dbAvatar);
       return dbAvatar;
     } else {
       // new avatar实体
       const avatar = new AvatarsEntity();
       avatar.size = String(file.size) + 'bit';
-      avatar.mimetype = file.mimetype;
-      avatar.fileUrl = Location;
+      avatar.mime_type = file.mimetype;
+      avatar.file_url = Location;
 
       return await this.avatarRepository.save(avatar);
     }

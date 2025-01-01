@@ -16,6 +16,7 @@ import {
 import { APP_FILTER, APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { DoctorModule } from '../doctor/doctor.module';
+import { IndicatorModule } from '../indicator/indicator.module';
 
 @Module({
   imports: [
@@ -25,6 +26,7 @@ import { DoctorModule } from '../doctor/doctor.module';
     FileModule,
     HospitalModule,
     DoctorModule,
+    IndicatorModule,
   ],
   controllers: [AppController],
   providers: [

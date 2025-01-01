@@ -25,6 +25,6 @@ export class FileController {
     const user = await this.userService.getUser();
     const avatar = await this.fileService.uploadAvatar(user, file);
     await this.userService.updateUserAvatar(avatar);
-    return { msg: '用户头像成功', data: avatar.fileUrl };
+    return { msg: '用户头像成功', data: avatar.file_url };
   }
 }
