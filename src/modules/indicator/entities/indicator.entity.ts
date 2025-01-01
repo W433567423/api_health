@@ -1,16 +1,25 @@
 import { TimeEntity } from '@/modules/app/entities/app.entity';
-import { Column, Entity } from 'typeorm';
+import { Column, CreateDateColumn, Entity } from 'typeorm';
 
 @Entity('indicator')
 export class IndicatorEntity extends TimeEntity {
   @Column({ type: 'varchar', comment: '检测项目', length: 20 })
-  item_name: string;
+  inspection_name: string;
 
   @Column({ type: 'varchar', comment: '英文缩写', length: 20, nullable: true })
-  en_name: string;
+  abbreviation: string;
 
   @Column({ type: 'varchar', comment: '结果', length: 20 })
-  result: string;
+  inspection_result: string;
+
+  @CreateDateColumn({
+    type: 'timestamp',
+    comment: '检测时间(s)',
+  })
+  inspection_time: Date;
+
+  @Column({ type: 'varchar', comment: '检测方法', length: 20, nullable: true })
+  inspection_method: string;
 
   @Column({ type: 'varchar', comment: '单位', length: 10 })
   unit: string;
@@ -30,9 +39,6 @@ export class IndicatorEntity extends TimeEntity {
     nullable: true,
   })
   max: string;
-
-  @Column({ type: 'varchar', comment: '检测方法', length: 20, nullable: true })
-  method: string;
 
   @Column({ type: 'varchar', comment: '检验号', length: 20, nullable: true })
   inspection_num: string;
