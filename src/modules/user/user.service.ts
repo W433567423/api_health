@@ -60,17 +60,17 @@ export class UserService {
     const password = md5Password(originPassword);
     console.log('🚀 ~ UserService ~ password:', password);
     // 新建用户
-    const dbUser = await this.userRepository.save({
-      username,
-      password,
-      email,
-    });
+    const user = new UserEntity();
+    user.user_name = username;
+    user.pass_word = password;
+    user.email = email;
+    const dbUser = await this.userRepository.save(user);
     // 登录
     return {
       user: dbUser,
       token: await this.jwtService.signAsync({
         id: dbUser.id,
-        username: dbUser.username,
+        username: dbUser.user_name,
       }),
     };
   }
