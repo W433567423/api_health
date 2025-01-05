@@ -1,10 +1,11 @@
 import { Body, Controller, Post, Req } from '@nestjs/common';
-import { ApiOperation } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiOperation } from '@nestjs/swagger';
 import { IReqUser, type IResData } from '../app';
 import { AddIndicatorReqDto } from './dtos/indicator.req.dto';
 import { IndicatorService } from './indicator.service';
 
 @Controller('indicator')
+@ApiBearerAuth('JWT-auth')
 export class IndicatorController {
   constructor(private readonly indicatorService: IndicatorService) {}
 

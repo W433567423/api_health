@@ -7,7 +7,7 @@ import {
   Post,
   Req,
 } from '@nestjs/common';
-import { ApiOperation } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiOperation } from '@nestjs/swagger';
 import { IReqUser, type IResData } from '../app';
 import {
   AddHospitalReqDto,
@@ -17,6 +17,7 @@ import { type HospitalEntity } from './entities/hospital.entity';
 import { HospitalService } from './hospital.service';
 
 @Controller('hospital')
+@ApiBearerAuth('JWT-auth')
 export class HospitalController {
   constructor(private readonly hospitalService: HospitalService) {}
 
@@ -26,6 +27,7 @@ export class HospitalController {
     @Req() req: IReqUser,
   ): Promise<IResData<HospitalEntity[]>> {
     const userId = req.user.id;
+    console.log('🚀 ~ HospitalController ~ userId:', userId);
     const hospitals = await this.hospitalService.getExistHospital(userId);
     return { msg: '获取已有医院成功', data: hospitals };
   }

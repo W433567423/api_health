@@ -7,13 +7,14 @@ import {
   Post,
   Req,
 } from '@nestjs/common';
-import { ApiOperation } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiOperation } from '@nestjs/swagger';
 import { IReqUser, type IResData } from '../app';
 import { DoctorService } from './doctor.service';
 import { AddDoctorReqDto, DeleteDoctorReqDto } from './dtos/doctor.req.dto';
 import { type DoctorEntity } from './entities/doctor.entity';
 
 @Controller('doctor')
+@ApiBearerAuth('JWT-auth')
 export class DoctorController {
   constructor(private readonly doctorService: DoctorService) {}
 
